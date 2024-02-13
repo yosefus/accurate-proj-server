@@ -1,3 +1,4 @@
+const { connect } = require("../db");
 const leadModel = require("../models/lead.model");
 
 
@@ -26,9 +27,14 @@ const update = async (filter, newdata) => {
 }
 
 const deleteLead = async (filter) => {
-    const result = await leadModel.findOneAndUpdate({_id:filter}, {isAktive: false} , {new: true})
+    const result = await leadModel.findOneAndUpdate(filter, {isActive: false} , {new: true})
     console.log(result);
     return result
 }
+
+// connect().then(async()=>{
+//     const result = await readOne( {_id: '65cb6f546b79d4910a4c24df'} )
+//     console.log(result);
+// })
 
 module.exports = {create, readOne, read, update, deleteLead }

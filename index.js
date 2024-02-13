@@ -8,5 +8,5 @@ app.use(cors())
 app.use(express.json())
 
 require('./DL/db').connect()
-
+// require('./DL/controllers/lead.controller')
 app.listen(port, () => console.log(`server is running on port ${port} `));
