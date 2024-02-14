@@ -55,4 +55,15 @@ router.post("/", async (req, res) => {
   });
 
 
+  router.post('/:id/newMsg',async(req,res)=>{
+try {
+  let msg = await campaignService.createMsg(req.body,req.params.id)
+  res.send(msg)
+} catch (error) {
+  console.log(error);
+  res.send(error)
+}
+  })
+
+
   module.exports = router;
