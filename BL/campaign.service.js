@@ -1,13 +1,19 @@
+const {create} = require("../DL/controllers/campaign.controller");
 const campaignController = require("../DL/controllers/campaign.controller");
-const {readOne} = require("./user.controller");
-
+const {readOne} = require("../DL/controllers/user.controller");
 
 let getAllCampaignFromService = async (userId) => {
-  if (readOne(userId)) {
+  let fond = await readOne(userId);
+  if (fond) {
     let resulet = await getAllCampaignFromController(userId);
     return resulet;
   }
-throw {msg: "cenot find this plees chek if you typ it good"};
+ else throw {msg: "cenot find this plees chek if you typ it good"};
 };
 
-module.exports = {getAllCampaignFromService};
+const createCampaimg = async (data) => {
+  const createCamp = await create(data);
+  return createCamp;
+};
+
+module.exports = {createCampaimg, getAllCampaignFromService};
