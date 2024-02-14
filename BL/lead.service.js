@@ -18,7 +18,8 @@ const createOneLead = async (lead) => {
     
 
     const updateLead = async (idLead, newLead) =>{
-     const updatedLead =   await update ({_id: idLead}, newLead)
+    const updatedLead =   await update ({_id: idLead}, newLead)
+
         return updatedLead
     
     }
