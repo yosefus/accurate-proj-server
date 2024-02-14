@@ -15,7 +15,9 @@ app.use('/api/lead',leadRouter);
 const campaignRouter = require("./router/campaign.router");
 app.use('/api/campaign',campaignRouter);
 
-
+app.use('*', (req, res) => {
+   res.status(404).json({msg: 'GOT YOU! this route is not create yet! 😘'})
+})
 
 
 app.listen(port, () => console.log(`server is running on port ${port} `));
