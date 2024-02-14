@@ -26,7 +26,6 @@ const postMsg = async (message, idCamp) => {
   return "ok"
 }
 
-
 const update = async (campaign, newData) => {
   const result = await campaignModel.findOneAndUpdate(campaign, newData, { new: true })
   console.log(result);
