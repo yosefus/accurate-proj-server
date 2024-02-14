@@ -35,6 +35,6 @@ const schema = new mongoose.Schema(
 
     })
 
-const leadModel = mongoose.model('leads', schema)
+const leadModel = mongoose.model('lead', schema)
 module.exports = leadModel
 
