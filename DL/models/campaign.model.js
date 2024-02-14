@@ -5,12 +5,12 @@ const msgSchema = new mongoose.Schema({
   isActive: {type: Boolean, default: true},
   content: {type: String, required: true},
   creationDate: {type: Date, default: Date.now},
-  status: {required: true, enum: ["sent", "draft"], default: "draft"},
+  status: {type: String, required: true, enum: ["sent", "draft"], default: "draft"},
   leads: [
     {
       lead: {type: mongoose.SchemaTypes.ObjectId, ref: "lead", required: true},
       receptionDate: {type: Date, default: Date.now},
-      status: {required: true, enum: ["sent", "recived"], default: "sent"},
+      status: {type: String, required: true, enum: ["sent", "recived"], default: "sent"},
     },
   ],
 });
