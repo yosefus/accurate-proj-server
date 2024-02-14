@@ -13,7 +13,7 @@ const leadRouter = require("./router/lead.router");
 app.use('/api/lead',leadRouter);
 
 const campaingRouter = require("./router/campaign.router");
-app.use('/api/campaing',campaingRouter);
+app.use('/api/campaign',campaingRouter);
 
 
 
