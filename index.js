@@ -12,8 +12,8 @@ app.use(express.json())
 const leadRouter = require("./router/lead.router");
 app.use('/api/lead',leadRouter);
 
-const campaingRouter = require("./router/campaign.router");
-app.use('/api/campaing',campaingRouter);
+const campaignRouter = require("./router/campaign.router");
+app.use('/api/campaign',campaignRouter);
 
 
 
