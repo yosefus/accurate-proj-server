@@ -53,6 +53,22 @@ router.post("/", async (req, res) => {
         .json({ message: error.msg || " we  update read one" });
     }
   });
+  
+
+// to put Update msg - ASAF- need to get subject + content
+    router.put("/updatemsg/:msgId", async (req, res) => {
+      try {
+        const result = await campaignService.msgUpdateService(
+          req.params.msgId,
+          req.body
+        );
+        res.send(result);
+      } catch (error) {
+        res
+          .status(error.code || 500)
+          .json({message: error.msg || " we  update read one"});
+      }
+    });
 
 
   module.exports = router;
