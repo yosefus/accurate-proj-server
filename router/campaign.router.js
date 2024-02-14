@@ -1,5 +1,4 @@
 const campaignService = require("../BL/campaign.service");
-
 const express = require("express");
 const router = express.Router();
 
@@ -42,4 +41,18 @@ router.post("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+
+
+  router.put("/add-lead/:idCampaign", async (req, res) => {
+    try {
+      const result = await  campaignService.updateCampaign (req.params.idCampaign, req.body)
+      res.send(result)
+    } catch (error) {
+      res
+        .status(error.code || 500)
+        .json({ message: error.msg || " we  update read one" });
+    }
+  });
+
+
+  module.exports = router;
