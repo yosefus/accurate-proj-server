@@ -1,5 +1,5 @@
 // const leadService = require("../BL/lead.service");
-const {createOneLead, updateLead} = require ("../BL/lead.service");
+const {createOneLead, updateLead, deleteService} = require ("../BL/lead.service");
 
 const express = require("express");
 const router = express.Router();
@@ -41,9 +41,9 @@ router.post("/", async (req, res) => {
 });
 
 // to update one lead
-router.put("/:id", async (req, res) => {
+router.put("/:_id", async (req, res) => {
   try {
-    const result = await  updateLead (req.params.id, req.body)
+    const result = await  updateLead (req.params._id, req.body)
     res.send(result)
   } catch (error) {
     res
@@ -52,9 +52,11 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
+// to delete one lead
+router.delete("/:_id",async (req, res) => {
   try {
-    res.send("u try to delete one lead");
+    let result = await deleteService(req.params._id);
+    res.send(result);
   } catch (error) {
     res
       .status(error.code || 500)
