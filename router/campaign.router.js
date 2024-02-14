@@ -3,10 +3,11 @@ const campaignService = require("../BL/campaign.service");
 const express = require("express");
 const router = express.Router();
 
-// to get all campaigns
-router.get("/", (req, res) => {
+// to get one campaigns - ASAF
+router.get("/:campaignId",async (req, res) => {
   try {
-    let resulet = campaignService.getAllCampaignFromService(req.body.user._id);
+    console.log(req.params.campaignId);
+    let resulet = await campaignService.getOneCampaign(req.params.campaignId);
     res.send(resulet);
   } catch (error) {
     res
@@ -14,6 +15,21 @@ router.get("/", (req, res) => {
       .json({message: error.msg || " we cent campaign one"});
   }
 });
+
+
+// to get all campaigns - ASAF
+router.get("/", async (req, res) => {
+  try {
+    let resulet = await campaignService.getAllCampaign(req.body.user._id);
+    res.send(resulet);
+  } catch (error) {
+    res
+      .status(error.code || 500)
+      .json({message: error.msg || " we cent campaign all"});
+  }
+});
+
+
 router.post("/", async (req, res) => {
   try {
     console.log(req.body);
