@@ -2,11 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3003;
-const cors = require('cors')
+const cors =require('cors');
+
+require('./DL/db').connect()
 
 app.use(cors())
 app.use(express.json())
 
-require('./DL/db').connect()
+const leadRouter = require("./router/lead.router");
+app.use('/api/lead',leadRouter);
+
 
 app.listen(port, () => console.log(`server is running on port ${port} `));
