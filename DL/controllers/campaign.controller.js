@@ -3,7 +3,9 @@ const leadModel = require("../models/lead.model");
 
 // to get one campaigns - ASAF
 let readOne = async (campaignId) => {
-  let resulet = await campaignModel.findOne({ _id: campaignId });
+  let resulet = await campaignModel
+    .findOne({_id: campaignId})
+    .populate("leads.lead");
   return resulet;
 };
 
@@ -14,10 +16,12 @@ let readAll = async (userId) => {
 };
 
 const create = async (data) => {
-  const result = await campaignModel.create(data)
+  const result = await campaignModel.create(data);
   console.log(result);
-  return result
-}
+  return result;
+};
+
+
 const postMsg = async (message, idCamp) => {
   const campaign = await campaignModel.findById(idCamp)
   if (!campaign) throw "error: not found"
@@ -38,6 +42,36 @@ const readLead = async (filter) => {
   return result
 }
 
+// to find one msg by msgId - ASAF
+let findOneMsg = async (msgId) => {
+  let resulet = await campaignModel.findOne({"msg._id": msgId});
+  return resulet;
+};
 
+// to get Update msg - ASAF
+const msgUpdate = async (msgId, newData) => {
+  const result = await campaignModel.findOneAndUpdate(
+    {"msg._id": msgId},
+    {
+      $set: {
+        "msg.$.subject": newData.subject,
+        "msg.$.content": newData.content,
+      },
+    },
+    {
+      new: true,
+    }
+  );
+  return result;
+};
 
-module.exports = { create, update, readLead, readAll, readOne, postMsg }
+module.exports = {
+  findOneMsg,
+  msgUpdate,
+  create,
+  update,
+  readLead,
+  readAll,
+  readOne,
+  postMsg
+};
