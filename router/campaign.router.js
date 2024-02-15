@@ -109,4 +109,15 @@ try {
     }
   });
 
+// to add lead and add to campaign - ASAF
+    router.post("/add-lead/:id", async (req, res) => {
+      try {
+        let resolt = await campaignService.createCampaignLeadservice(req.params.id,req.body );
+        res.send(resolt);
+      } catch (error) {
+        console.log(error);
+        res.send(error);
+      }
+    });
+
   module.exports = router;
