@@ -6,6 +6,7 @@ const {
     update,
     readLead,
     postMsg,
+    PutController,
 } = require("../DL/controllers/campaign.controller");
 const userController = require("../DL/controllers/user.controller");
 
@@ -75,6 +76,12 @@ const msgUpdateService = async (msgId, data) => {
   return resulet;
 };
 
+// to put campaign name - ASAF
+const PutSevice = async (campaignId, data) => {
+  const resulet = await PutController(campaignId, data);
+  return resulet;
+};
+
 // msgUpdate("65ccb372aa09556e7f3bf014", {
 //   subject: "הודעה ראשונה - asafff22222",
 //   content: "מה יגבר",
@@ -86,6 +93,7 @@ const msgUpdateService = async (msgId, data) => {
 
 
 module.exports = {
+  PutSevice,
   msgFindOneService,
   msgUpdateService,
     createMsg,
