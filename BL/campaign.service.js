@@ -1,12 +1,13 @@
+const fromleadPayg = require("../BL/lead.service");
 const {
   msgUpdate,
-    create,
-    readOne,
-    readAll,
-    update,
-    readLead,
-    postMsg,
-    PutController,
+  create,
+  readOne,
+  readAll,
+  update,
+  readLead,
+  postMsg,
+  PutController,
 } = require("../DL/controllers/campaign.controller");
 const userController = require("../DL/controllers/user.controller");
 
@@ -16,25 +17,30 @@ const createCampaign = async (campaign) => {
   }
   const createCamp = await create(campaign);
   return createCamp;
-}
+};
 
 const createMsg = async (msg, idCamp) => {
-    const arrMsg = Object.keys(msg)
-    if (arrMsg.length !== 2) { throw 'There is an error with the amount of keys' }
-    for (v of arrMsg) {
-        if (!(["content", "subject"].includes(v))) {
-            throw 'There is an error with one of the keys'
-        }
-        if (!msg[v]) throw 'error: One of the values ​​is empty'
+  const arrMsg = Object.keys(msg);
+  if (arrMsg.length !== 2) {
+    throw "There is an error with the amount of keys";
+  }
+  for (v of arrMsg) {
+    if (!["content", "subject"].includes(v)) {
+      throw "There is an error with one of the keys";
     }
-    const result = await postMsg(msg, idCamp)
-    return result
-}
+    if (!msg[v]) throw "error: One of the values ​​is empty";
+  }
+  const result = await postMsg(msg, idCamp);
+  return result;
+};
 
 const deleteMassega = async (idCamp, idMsg) => {
-    const result = await update({ _id: idCamp , "msg._id": idMsg }, { $set: { "msg.$.isActive": false } })
-    return result
-}
+  const result = await update(
+    {_id: idCamp, "msg._id": idMsg},
+    {$set: {"msg.$.isActive": false}}
+  );
+  return result;
+};
 
 const updateCampaign = async (idCampaign, Lead) => {
   if (!Lead.lead) throw {msg: "אנא הוסף את פרטי הליד"};
@@ -82,24 +88,29 @@ const PutSevice = async (campaignId, data) => {
   return resulet;
 };
 
-// msgUpdate("65ccb372aa09556e7f3bf014", {
-//   subject: "הודעה ראשונה - asafff22222",
-//   content: "מה יגבר",
-// })
+// to creat kead in campaign - ASAF
+const createCampaignLeadservice = async (campId, body) => {
+ const theObg = await fromleadPayg.createOneLead(body);
+  const resulet = await updateCampaign(campId,{...theObg, lead: theObg._id});
+  return resulet;
+};
+
+
+
+let newLead={Fname: 'ASAF', Lname: 'ASHWAL', email: "ashwalasafx@gmail.com", phone:"0523334444"}
+// createCampaignLeadservice("65cc7b9c238c212521568824", newLead)
 //   .then((res) => console.log(res))
 //   .catch((e) => console.log(e.message));
 
-
-
-
 module.exports = {
+  createCampaignLeadservice,
   PutSevice,
   msgFindOneService,
   msgUpdateService,
-    createMsg,
-    createCampaign,
-    updateCampaign,
-    getOneCampaign,
-    getAllCampaign,
-    deleteMassega
-}
+  createMsg,
+  createCampaign,
+  updateCampaign,
+  getOneCampaign,
+  getAllCampaign,
+  deleteMassega,
+};
