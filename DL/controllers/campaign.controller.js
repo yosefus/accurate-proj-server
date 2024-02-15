@@ -3,7 +3,7 @@ const leadModel = require("../models/lead.model");
 
 // to get one campaigns - ASAF
 let readOne = async (campaignId) => {
-  let resulet = await campaignModel.find({ _id: campaignId });
+  let resulet = await campaignModel.findOne({ _id: campaignId });
   return resulet;
 };
 

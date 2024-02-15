@@ -9,6 +9,11 @@ require('./DL/db').connect()
 app.use(cors())
 app.use(express.json())
 
+app.use((req, res, next) => {
+   req.body.user = { _id: '65c33dc58a4b7bf8aea86b09' }
+   next()
+})
+
 const leadRouter = require("./router/lead.router");
 app.use('/api/lead', leadRouter);
 
