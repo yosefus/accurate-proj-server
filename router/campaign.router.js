@@ -92,5 +92,21 @@ try {
     }
       })
 
+// to put campaign name - ASAF
+  router.put("/:campaignId", async (req, res) => {
+    try {
+      // let msg = await campaignService.createMsg(req.body, req.params.id);
+      // console.log( req.body);
+      let resulet = await campaignService.PutSevice(
+        req.params.campaignId,
+        req.body
+      );
+      res.send(resulet);
+      console.log( resulet);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  });
 
   module.exports = router;

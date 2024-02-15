@@ -64,8 +64,26 @@ const msgUpdate = async (msgId, newData) => {
   );
   return result;
 };
+ 
 
+// to put campaign name - ASAF
+const PutController = async (campaignId, data) => {
+ const result = await campaignModel.findOneAndUpdate(
+   {_id: campaignId},
+   {title: data.title, details: data.details},
+
+   {
+     new: true,
+   }
+ );
+  // console.log(result);
+  return result;
+ 
+};
+PutController("65cc7b9c238c212521568824", {title: "test", details: ""})
+  // .then((res) => console.log(res));
 module.exports = {
+  PutController,
   findOneMsg,
   msgUpdate,
   create,
